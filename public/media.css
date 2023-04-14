@@ -1,0 +1,97 @@
+@media (min-width: 320px) and (max-width: 420px) {
+    /*...................*/
+    /*Media Queries...*/
+    
+    /*For mobile phones*/
+      * {
+        margin: 0px 0px;
+        padding: 0px 0px;
+      }
+
+    .main{
+        height: 590px;
+        width: 350px;
+    }
+
+    .main span{
+        font-size: 30px;
+        width: 300px;
+        text-align: center;
+    }
+
+    .container{
+        /* background-color: rgba(255, 0, 0, 0.26); */
+        height: 365px;
+        width: 350px;
+        grid-template-rows: repeat(3,120px);
+        grid-template-columns: repeat(3, 117px);
+    }
+
+    
+    .box{
+        border: 3px solid rgb(214, 182, 0);
+        font-size: 110px;
+    }
+
+    .box:hover{
+        background-color: rgb(150, 146, 110);
+    }
+    .bt{
+        border-top: 0px;
+    }
+    .bb{
+        border-bottom: 0px;
+    }
+    .bl{
+        border-left: 0px;
+    }
+    .br{
+        border-right: 0px;
+    }
+
+        
+    #restart{
+        height: 40px;
+        width: 110px;
+        font-size: 25px;
+        left: 35%;
+        transition: ease-in-out all 0.1s;
+        transform: scale(1);
+    }
+
+    #restart:active{
+        background-color: rgb(192, 192, 192);
+        transform: scale(1.2);
+    }
+
+
+    span.scoreBoard{
+        /* background-color: yellow; */
+        color: rgb(214, 182, 0);
+        font-size: 28px;
+        left: 50%; 
+    }
+
+    .connect{
+        /* background-color: red; */
+        height: 150px;
+        width: 305px;
+        top: 40%;
+        left: 6%;
+    }
+
+    .connect button{
+        height: 40px;
+        width: 200px;
+        margin: 5px;
+        font-size: medium;
+    }
+
+    .connect input{
+        height: 30px;
+        width: 200px;
+        margin: 5px;
+        font-size: medium;
+    }
+
+}

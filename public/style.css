@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
+
+
+*{
+    margin: 0px 0px;
+    padding: 0px 0px;
+}
+
+body{
+    background-color: rgb(104, 104, 104);
+    position: relative;
+}
+
+.main span{
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    font-family: 'Finger Paint', cursive;
+    text-decoration-line: underline;
+    text-decoration-style: wavy;
+    text-underline-offset: 15px;
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+}
+
+.main{
+    background-color: rgb(83, 83, 83);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 5%);
+    height: 900px;
+    width: 600px;
+}
+
+.container{
+    height: 500px;
+    width: 500px;
+    display: grid;
+    grid-template-rows: repeat(3,167px);
+    grid-template-columns: repeat(3, 167px);
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    cursor: pointer;
+}
+
+.box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid rgb(214, 182, 0);
+    font-size: 160px;
+    font-family: 'Finger Paint', cursive;
+    color: rgb(255, 255, 255);
+}
+
+.box:hover{
+    background-color: rgb(150, 146, 110);
+}
+.bt{
+    border-top: 0px;
+}
+.bb{
+    border-bottom: 0px;
+}
+.bl{
+    border-left: 0px;
+}
+.br{
+    border-right: 0px;
+}
+
+#restart{
+    height: 50px;
+    width: 130px;
+    position: absolute;
+    top: 92%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: cursive;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: gray;
+    color: rgb(0, 255, 0);
+    transition: ease-in-out all 0.1s;
+    transform: scale(1);
+}
+
+#restart:hover{
+    background-color: rgb(192, 192, 192);
+    transform: scale(1.1);
+}
+
+
+span.scoreBoard{
+    /* background-color: yellow; */
+    color: rgb(214, 182, 0);
+    font-size: 40px;
+    font-weight: bold;
+    font-family: monospace;
+    text-decoration-line: none;
+    position: absolute;
+    top: 85%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+}
+
+
+.connect{
+    position: absolute;
+    top: 35%;
+    left: 25%;
+    /* background-color: red; */
+    height: 300px;
+    width: 300px;
+    text-align: center;
+}
+
+.connect button{
+    background-color: rgb(116, 129, 0);
+    height: 50px;
+    width: 250px;
+    margin: 20px;
+    font-size: larger;
+    font-family: cursive;
+    font-weight: bold;
+    border: 2px solid black;
+    border-radius: 10px;
+    color: white;
+}
+
+.connect button:hover{
+    background-color: gray;
+}
+
+.connect input{
+    background-color: rgb(56, 56, 56);
+    height: 40px;
+    width: 250px;
+    margin: 20px;
+    text-align: center;
+    font-size: larger;
+    font-family: cursive;
+    font-weight: bold;
+    border: 2px solid black;
+    border-radius: 10px;
+    color: rgb(255, 255, 255);
+
+}
+
