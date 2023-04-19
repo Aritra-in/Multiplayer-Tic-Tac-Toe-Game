@@ -114,6 +114,42 @@ span.scoreBoard{
     
 }
 
+span.showTurn{
+    /* background-color: red; */
+    height: 100px;
+    width: 300px;
+    color: rgb(0, 190, 57);
+    font-size: 50px;
+    font-weight: bold;
+    font-family: 'Finger Paint', cursive;
+    text-align: center;
+    text-decoration-line: none;
+    position: absolute;
+    top: 75%;
+    left: -35%;
+
+}
+
+span.waitingBanner{
+    height: 100px;
+    width: 500px;
+    color: rgb(0, 190, 57);
+    font-size: 30px;
+    font-weight: bold;
+    font-family: monospace;
+    text-align: center;
+    line-height: 2;
+    text-decoration-line: none;
+    position: absolute;
+    top: 75%;
+    left: 50%;
+}
+
+span.waitingBanner i{
+    padding: 10px;
+    color: rgb(204, 184, 0);
+}
+
 
 .connect{
     position: absolute;
@@ -123,10 +159,11 @@ span.scoreBoard{
     height: 300px;
     width: 300px;
     text-align: center;
+    transition: ease-in-out all 0.5s;
 }
 
 .connect button{
-    background-color: rgb(116, 129, 0);
+    background-color: rgb(150, 167, 0);
     height: 50px;
     width: 250px;
     margin: 20px;
@@ -140,6 +177,13 @@ span.scoreBoard{
 
 .connect button:hover{
     background-color: gray;
+}
+
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
 }
 
 .connect input{

@@ -1,4 +1,7 @@
-const socket = io.connect("http://192.168.0.53:3000/");
+ip_address_for_localhost = "http://localhost:3000/";
+ip_address_private = "http://192.168.0.50:3000/";
+
+const socket = io.connect(ip_address_private);
 // let roomId = parseInt(prompt("enter room ID: "));
 let box = document.querySelectorAll(".box");
 let arr = Array.from(box).fill(null);
@@ -6,9 +9,13 @@ let winBox = Array.from(box);
 let turn = 'X';
 let restartBTN = document.getElementById("restart");
 let sb = document.querySelector(".scoreBoard");
+let turnShow = document.querySelector(".showTurn");
 let clickable = document.querySelector(".container");
 let roomButtons = document.querySelector(".connect");
-let x = window.matchMedia("(min-width: 320px)" && "(max-width: 420px)");
+let mainDiv = document.querySelector(".main");
+let waitBanner = document.querySelector(".waitingBanner");
+let mobileDevices = window.matchMedia("(min-width: 320px)" && "(max-width: 420px)");
+let tabletDevices = window.matchMedia("(min-width: 421px)" && "(max-width: 1300px)");
 let newRoom = document.getElementById("newRoom");
 let gamecode = document.getElementById("gamecode");
 let joinBtn = document.getElementById("join");
@@ -27,6 +34,7 @@ let roomId;
 let clientID; 
 
 
+waitBanner.style.display = "none";
 clickable.style.display = "none";
 restartBTN.style.display = "none";
 
@@ -39,6 +47,7 @@ newRoom.addEventListener('click', ()=>{
     gamecode.disabled = true;
     joinBtn.disabled = true;
     joinBtn.style.backgroundColor = "gray";
+    console.log(roomId);
     socket.emit('join', roomId);
 })
 
@@ -62,23 +71,35 @@ socket.on('serverMsg', (socketID)=>{
 
 socket.on('roomError', ()=>{
     alert("Please Enter a valid Room ID");
+    location.reload();
 })
 
 socket.on('roomFull',()=>{
     alert("The Desired Room is full\nPlease Create another room");
+    location.reload();
+})
+
+socket.on('waiting', ()=>{
+    waitBanner.style.display = "";
 })
 
 socket.on('createBoard',()=>{
-    if(x.matches){
-        roomButtons.style.top = "110%"
+    waitBanner.style.display = "none";
+    if(mobileDevices.matches){
+        roomButtons.style.top = "105%";
+    }
+    else if(tabletDevices.matches){
+        mainDiv.style.left = "65%"
+        roomButtons.style.left = "-50%";
+        turnShow.style.left = "-25%";
     }
     else{
         roomButtons.style.left = "-60%";
     }
     clickable.style.display = "";
-    restartBTN.style.display = "";
-
+    // restartBTN.style.pointerEvents = "none";
 })
+
 
 
 box.forEach((element) => {
@@ -97,12 +118,14 @@ function put(element) {
         socket.emit('play',turn, id, roomId);
         turnover();
         socket.emit('gameState', clientID, roomId);
+        draw();
         win();
 
     }
 }
 
 socket.on('updateGame', (turn, id)=>{
+    arr[id] = turn;
     winBox[id].innerText = turn;
     turnover();
 })
@@ -117,7 +140,10 @@ function restart(){
         box.innerText = "";
     })
     clickable.style.pointerEvents = "auto";
+    restartBTN.style.display = "none";
     sb.innerText = "";
+    turnShow.style.display = "";
+    turnShow.innerText = "";
     winBox.forEach((e) => {
         e.style.backgroundColor = "";
     })
@@ -126,6 +152,7 @@ function restart(){
 
 function restartGame() {
     socket.emit('restart', roomId);
+    socket.emit('boardOnOff', roomId);
     restart();
 }
 
@@ -145,28 +172,51 @@ function win() {
                 winBox[element[i]].style.backgroundColor = "rgba(21, 255, 0, 0.486)";
                 socket.emit('win', element, roomId, arr[element[0]]);
             }
-            sb.innerText = `'${arr[element[0]]}' Win`;
-            console.log(element);
+            turnShow.style.display="none";
+            sb.innerText = `'${arr[element[0]]}' Win 🎉`;
+            // console.log(element);
+            restartBTN.style.display = "";
             clickable.style.pointerEvents = "none";
         }
     })
 }
 
+function draw(){
+    if(arr.indexOf(null) === -1){
+        socket.emit('onDraw', roomId);
+        turnShow.style.display="none";
+        sb.innerText = `Match Draw 🤗`;
+        clickable.style.pointerEvents = "none";
+        restartBTN.style.display = "";
+        // console.log('Draw');
+    }
+}
+
+socket.on('draw', ()=>{
+    turnShow.style.display="none";
+    sb.innerText = `Match Draw 🤗`;
+    clickable.style.pointerEvents = "none";
+    restartBTN.style.display = "";
+})
+
 socket.on('winArray', (element, sign)=>{
     for (let i = 0; i < 3; i++) {
         winBox[element[i]].style.backgroundColor = "rgba(21, 255, 0, 0.486)";
     }
-    sb.innerText = `'${sign}' Win`;
-    console.log(element);
+    turnShow.style.display="none";
+    sb.innerText = `'${sign}' Win 🎉`;
+    // console.log(element);
     clickable.style.pointerEvents = "none";
+    restartBTN.style.display = "";
 })
 
 socket.on('off', ()=>{
     clickable.style.pointerEvents = "none";
+    turnShow.innerText = "Opponent's Turn";
 })
 
 
 socket.on('on', ()=>{
     clickable.style.pointerEvents = "auto";
+    turnShow.innerText = "Your Turn";
 })
-

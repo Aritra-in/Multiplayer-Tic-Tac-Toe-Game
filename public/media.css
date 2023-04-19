@@ -1,4 +1,5 @@
 @media (min-width: 320px) and (max-width: 420px) {
+    @import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
     /*...................*/
     /*Media Queries...*/
     
@@ -9,12 +10,13 @@
       }
 
     .main{
-        height: 590px;
+        height: 620px;
         width: 350px;
     }
 
     .main span{
         font-size: 30px;
+        font-family: 'Finger Paint', cursive;
         width: 300px;
         text-align: center;
     }
@@ -53,7 +55,8 @@
     #restart{
         height: 40px;
         width: 110px;
-        font-size: 25px;
+        font-size: 20px;
+        font-family: 'Finger Paint', cursive;
         left: 35%;
         transition: ease-in-out all 0.1s;
         transform: scale(1);
@@ -72,26 +75,59 @@
         left: 50%; 
     }
 
+    span.showTurn{
+        /* background-color: red; */
+        height: 100px;
+        width: 200px;
+        font-size: 30px;
+        font-weight: bold;
+        font-family: 'Finger Paint', cursive;
+        position: absolute;
+        top: 92%;
+        left: 50%;
+    
+    }
+
+    span.waitingBanner{
+        font-size: 20px;
+        top: 80%
+    }
+
     .connect{
         /* background-color: red; */
         height: 150px;
         width: 305px;
         top: 40%;
         left: 6%;
+        transition: ease-in-out all 0.5s;
     }
 
     .connect button{
         height: 40px;
         width: 200px;
         margin: 5px;
-        font-size: medium;
+        font-size: large;
+        font-family: fantasy;
     }
 
     .connect input{
         height: 30px;
         width: 200px;
         margin: 5px;
-        font-size: medium;
+        font-size: large;
+        font-family: fantasy;
     }
 
 }
+
+/* @media (min-width: 421px) and (max-width: 1300px){
+    .main{
+        top: 50%;
+        left: 50%;
+    }
+
+    .connect{
+        top: 35%;
+        left: 25%;
+    }
+} */

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./media.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Tic Tac Toe</title>
 </head>
 <body>
@@ -25,11 +26,19 @@
         <button id="restart">Restart</button>
         <div>
             <span class="scoreBoard"></span>
+            <span class="showTurn"></span>
+        </div>
+        
+        
+        <div>
+            <span class="waitingBanner">Waiting for your Opponent to Join<br>
+                <i class="fas fa-spinner fa-spin fa-3x"></i>
+            </span>
         </div>
 
         <div class="connect">
             <button id="newRoom">Create Room</button><br>
-            <input type="text" id="gamecode"><br>
+            <input type="number" placeholder="Room Code" id="gamecode"><br>
             <button id="join">Join</button><br>
         </div>
 
