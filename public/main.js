@@ -1,5 +1,11 @@
+
+const bgAudio = new Audio("./bgSounds/MushroomsLife.mp3");
+const buttonAudio = new Audio("./bgSounds/Button_Press.mp3");
+const inputAudio = new Audio("./bgSounds/Drawing_Pencil.mp3");
+const winAudio = new Audio("./bgSounds/Win1.mp3");
+
 ip_address_for_localhost = "http://localhost:3000/";
-ip_address_private = "http://192.168.0.50:3000/";
+ip_address_private = "http://192.168.0.55:3000/";
 
 const socket = io.connect(ip_address_private);
 // let roomId = parseInt(prompt("enter room ID: "));
@@ -40,6 +46,7 @@ restartBTN.style.display = "none";
 
 
 newRoom.addEventListener('click', ()=>{
+    buttonAudio.play();
     roomId = Math.round(Math.random()*10000);
     gamecode.value = roomId;
     newRoom.disabled = true;
@@ -52,6 +59,7 @@ newRoom.addEventListener('click', ()=>{
 })
 
 joinBtn.addEventListener('click', ()=>{
+    buttonAudio.play();
     roomId = parseInt(gamecode.value);
     joinBtn.disabled = true;
     joinBtn.style.backgroundColor = "gray";
@@ -61,7 +69,6 @@ joinBtn.addEventListener('click', ()=>{
     console.log(roomId);
     socket.emit('join', roomId);
 })
-
 
 
 socket.on('serverMsg', (socketID)=>{
@@ -84,6 +91,8 @@ socket.on('waiting', ()=>{
 })
 
 socket.on('createBoard',()=>{
+    bgAudio.play();
+    bgAudio.loop = true;
     waitBanner.style.display = "none";
     if(mobileDevices.matches){
         roomButtons.style.top = "105%";
@@ -110,6 +119,7 @@ restartBTN.addEventListener('click', restartGame);
 
 
 function put(element) {
+    inputAudio.play();
     const id = element.target.id;
     if (arr[id] == null) {
         arr[id] = turn;
@@ -125,6 +135,7 @@ function put(element) {
 }
 
 socket.on('updateGame', (turn, id)=>{
+    inputAudio.play();
     arr[id] = turn;
     winBox[id].innerText = turn;
     turnover();
@@ -135,6 +146,7 @@ function turnover() {
 }
 
 function restart(){
+    buttonAudio.play();
     arr.fill(null);
     box.forEach((box) => {
         box.innerText = "";
@@ -172,6 +184,7 @@ function win() {
                 winBox[element[i]].style.backgroundColor = "rgba(21, 255, 0, 0.486)";
                 socket.emit('win', element, roomId, arr[element[0]]);
             }
+            winAudio.play();
             turnShow.style.display="none";
             sb.innerText = `'${arr[element[0]]}' Win 🎉`;
             // console.log(element);
@@ -203,6 +216,7 @@ socket.on('winArray', (element, sign)=>{
     for (let i = 0; i < 3; i++) {
         winBox[element[i]].style.backgroundColor = "rgba(21, 255, 0, 0.486)";
     }
+    winAudio.play();
     turnShow.style.display="none";
     sb.innerText = `'${sign}' Win 🎉`;
     // console.log(element);
