@@ -7,7 +7,7 @@ const winAudio = new Audio("./bgSounds/Win1.mp3");
 ip_address_for_localhost = "http://localhost:3000/";
 ip_address_private = "http://192.168.0.55:3000/";
 
-const socket = io.connect(ip_address_private);
+const socket = io.connect(ip_address_for_localhost);
 // let roomId = parseInt(prompt("enter room ID: "));
 let box = document.querySelectorAll(".box");
 let arr = Array.from(box).fill(null);
